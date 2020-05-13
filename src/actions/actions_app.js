@@ -7,5 +7,6 @@ export default {
     },
     completeWord: () => {
         return { type: 'completeWord' };
-    }
+    },
+
 }

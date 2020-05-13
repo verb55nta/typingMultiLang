@@ -15,7 +15,7 @@ const initialState = {
     targetString: wordsData[0]['en'],
 }
 
-export default function reducer(state=initialState, action) {
+export default function componentReducer(state=initialState, action) {
     
     switch (action.type) {
         case 'next':
@@ -38,6 +38,7 @@ export default function reducer(state=initialState, action) {
             return Object.assign({}, state, {
                 answer:answerNew,
             });
+
         default:
             return state;
     }

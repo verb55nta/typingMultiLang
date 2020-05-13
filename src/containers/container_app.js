@@ -7,7 +7,9 @@ import {getIdByRandom} from '../utils/util'
 import {convertForTypingNoSpecial} from '../utils/util'
 
 function mapStateToProps(state) {
-    return state
+    console.log(state);
+    //return { state:state.component };
+    return state.component;
 }
 
 function mapDispatchToProps(dispatch) {
@@ -23,7 +25,7 @@ function mapDispatchToProps(dispatch) {
             }
             else {
                 const cs = convertForTypingNoSpecial(state.data[state.id][state.tgt]); //副作用？
-                console.log(cs[state.typeCount]);
+                //console.log(cs[state.typeCount]);
                 if (key.key === cs[state.typeCount]) {
                     dispatch(Actions['typeCountIncrement']());
                     if (state.typeCount >= cs.length - 1) {
@@ -33,6 +35,9 @@ function mapDispatchToProps(dispatch) {
                 
             }
         },
+        displayAnswer: () => {
+            dispatch(Actions['completeWord']());
+        }
     }
 }
 

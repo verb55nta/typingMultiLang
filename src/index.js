@@ -5,11 +5,13 @@ import './index.css';
 //import App from './App';
 //import * as serviceWorker from './serviceWorker';
 
-import { createStore } from 'redux'
+import { createStore,combineReducers } from 'redux'
 import { Provider } from 'react-redux'
+import { Field, reduxForm,reducer as formReducer } from 'redux-form'
 
 import ContainerApp from './containers/container_app'
-import reducer from './reducers/reducer'
+
+import componentReducer from './reducers/componentReducer'
 
 //ReactDOM.render(<App />, document.getElementById('root'));
 
@@ -18,7 +20,16 @@ import reducer from './reducers/reducer'
 // Learn more about service workers: https://bit.ly/CRA-PWA
 //serviceWorker.unregister();
 
-const store = createStore(reducer)
+const rootReducer = combineReducers({
+    component:componentReducer,
+    // ...your other reducers here
+    // you have to pass formReducer under 'form' key,
+    // for custom keys look up the docs for 'getFormState'
+    form: formReducer,
+  })
+
+const store = createStore(rootReducer)
+
 
 ReactDOM.render(
     <Provider store={store}>

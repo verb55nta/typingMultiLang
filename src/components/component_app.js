@@ -6,6 +6,7 @@ import {
     TouchableHighlight,
 } from 'react-native';
 import {convertForTypingNoSpecial} from '../utils/util'
+import SelectForm from './selectform'
 
 export default class App extends React.Component {
 
@@ -13,7 +14,7 @@ export default class App extends React.Component {
         super(props);
         window.onkeydown = (e) => {
             const state=this.props
-            props.typingProcess(state,e);
+            props.typingProcess(state, e);
         }
     }
 
@@ -39,17 +40,30 @@ export default class App extends React.Component {
             <Text style={styles.buttonText}>Next</Text>
         </TouchableHighlight>
 
+        let answer = <TouchableHighlight
+            onPress={() => props.displayAnswer(props)}
+            style={styles.button}
+            underlayColor={'#0A84D0'}>
+            <Text style={styles.buttonText}>Answer</Text>
+        </TouchableHighlight>
+        
         return (
-            <View style={styles.container}>
-                {next}
-                <Text style={styles.numText}>{id}</Text>
-                <Text style={styles.srcText}>{en} {ja} </Text>
-                <Text style={props.answer === 1 ? styles.tgtCompleteText : styles.tgtText}>{fr} </Text>
-                <Text style={props.typeCount===0 ? styles.inputInitText : styles.inputText}>{tgt} </Text>
-                
-                <Text style={styles.convText}>{s}</Text>
 
+            <View style={styles.container}>
+                <SelectForm parProps={props} />        
+                <View style={styles.containerR}>
+                    {next}{answer}
+                </View>
+                <View style={styles.containerCont}>
+                
+                    <Text style={styles.numText}>{id}</Text>
+                    <Text style={styles.srcText}>{en} {ja} </Text>
+                    <Text style={props.answer === 1 ? styles.tgtCompleteText : styles.tgtText}>{fr} </Text>
+                    <Text style={props.typeCount===0 ? styles.inputInitText : styles.inputText}>{tgt} </Text>
+                    <Text style={styles.convText}>{s}</Text>
+                </View>
             </View>
+
         );  
     }
 }
@@ -61,6 +75,22 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        //margin:'auto',
+    },
+    containerR: {
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        //justifyContent: 'center',
+        alignItems: 'center',
+        //margin:'auto',
+    },
+    containerCont: {
+        flex: 4,
+        flexDirection: 'column',
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        //justifyContent: 'center',
         //margin:'auto',
     },
     logo: {
